@@ -1,0 +1,10 @@
+<h1 style = 'color:yellow'>Hello Golang<h1>
+//使用图片的地址
+<img id='i1' name= 'zephyr' src='https://img0.baidu.com/it/u=3598159207,3129425429&fm=253&fmt=auto&app=138&f=JPEG?w=236&h=177'>
+//切换换地址
+<button id='b1'>切换</button>
+<script>
+    document.getElementById('b1').onclick=function(){
+        document.getElementById('i1').src='https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2Ff46f6e9fbff1facd22104c3a792f505dae1b02cb8200-zNycDT_fw658&refer=http%3A%2F%2Fhbimg.b0.upaiyun.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1662104301&t=9258fa9e4fdba5f37d2688b9b032c16e'
+    }
+</script>
