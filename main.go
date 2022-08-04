@@ -1,31 +1,43 @@
 package main
 
 import (
-	"fmt"
-	"io/ioutil"
+	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
-//规定函数必须接受两个值，ResponseWriter是返回网页的值，Request是接受请求。
-func sayHello(w http.ResponseWriter, r *http.Request) {
+func main() {
+	//返回默认的路由引擎
+	r := gin.Default()
+	//r.GET("/hello", sayHello)
 
-	//Fprintln方法有两个返回值，不想被标记的话 就用两个下划线接收一下
-	_, _ = fmt.Fprintln(w, "<h1>Hello Zephyr<h1>Hello Zephyr")
-	_, _ = fmt.Fprintln(w, "<h2>Hello Zephyr<h2>")
-	//io读取文件，返回byte[]类型，然后转成String
-	b, _ := ioutil.ReadFile("./hello.txt")
-	_, _ = fmt.Fprintln(w, string(b))
+	r.GET("/hello", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"bookname": "HarryPorter1",
+		})
+	})
+	r.POST("/hello", func(c *gin.Context) {
+		//http库里的OK就代表200
+		c.JSON(http.StatusOK, gin.H{
+			"bookname": "HarryPorter2",
+		})
+	})
+	r.PUT("/hello", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"bookname": "HarryPorter3",
+		})
+	})
+	r.DELETE("/hello", func(c *gin.Context) {
+		c.JSON(http.StatusOK, gin.H{
+			"bookname": "HarryPorter4",
+		})
+	})
+
+	//启动服务,没有这个run不了啊
+	r.Run()
 }
 
-//想要启动的话，需要在终端 go run main.go
-//启动时没有消息提示，但是确实启动了，通过localhost:8080访问
-//也可以点这个开始按钮
-func main() {
-	http.HandleFunc("/hello", sayHello)
-	err := http.ListenAndServe("localhost:8080", nil)
-	if err != nil {
-		fmt.Println("http server start failure, err:%v\n", err)
-		return
-	}
-
+func sayHello(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"message": "Hello GoLang",
+	})
 }
